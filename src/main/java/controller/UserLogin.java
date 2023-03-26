@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import service.UserService;
 import model.UserModel;
 
@@ -62,6 +63,8 @@ public class UserLogin extends HttpServlet {
 		
 		if(success == 1) {
 			System.out.println("User login was successful and returned success = 1 ... redirecting to dashboard");
+			HttpSession session=request.getSession();
+			session.setAttribute("email",email);
 			RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/Dashboard.jsp");
 			dispathcer.forward(request,response);
 		}else {

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<% session.invalidate(); %>
 	<h1>User Login</h1>
 	<div>
 		<form action="<%= request.getContextPath() %>/login" method = "post">

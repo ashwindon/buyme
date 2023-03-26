@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Welcome to Dashboard page</h1>
+	<% 
+		String email = (String) session.getAttribute("email");
+		if(email==null)
+		{
+			response.sendRedirect("Login.jsp");
+		}
+	%>
+	<h1>Welcome <%=email %> </h1>
+	<a href="login">Logout</a>
 </body>
 </html>
