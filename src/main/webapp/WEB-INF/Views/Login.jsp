@@ -7,7 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% session.invalidate(); %>
+	<%
+	session.setAttribute("email",null);
+	session.invalidate();
+	//out.println(response.toString());
+	%>
 	<h1>User Login</h1>
 	<div>
 		<form action="<%= request.getContextPath() %>/login" method = "post">

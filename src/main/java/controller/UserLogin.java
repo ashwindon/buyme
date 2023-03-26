@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,34 +46,45 @@ public class UserLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
-		System.out.println("Input from Login page email as :" + email);
+		//System.out.println("Input from Login page email as :" + email);
 		String password = request.getParameter("password");
-		System.out.println("Input from Login page password as :" + password);
-		System.out.println("Received Login request");
+		//System.out.println("Input from Login page password as :" + password);
+		//System.out.println("Received Login request");
 		UserModel userModel = new UserModel();
 		userModel.setEmail(email);
 		userModel.setPassword_hash(password); //using the UserModel class temporarily to send email and password to User Login Service
 		int success = 0;
 		try {
-			System.out.println("Calling login function");
+			//System.out.println("Calling login function");
 			success = userService.loginUser(userModel);
-			System.out.println("After Calling login function");
+			//System.out.println("After Calling login function");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		if(success == 1) {
-			System.out.println("User login was successful and returned success = 1 ... redirecting to dashboard");
+			//System.out.println("User login was successful and returned success = 1 ... redirecting to dashboard");
 			HttpSession session=request.getSession();
 			session.setAttribute("email",email);
-			RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/Dashboard.jsp");
-			dispathcer.forward(request,response);
+//			RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/Dashboard.jsp");
+//			dispathcer.forward(request,response);
+			response.sendRedirect("/BuyMe/Dashboard");
 		}else {
 			//login failed try again
 			//redirect to same page
-			System.out.println("Login failed");
-			RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/Login.jsp");
-			dispathcer.forward(request,response);
+			//System.out.println("Login failed");
+//			RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/Login.jsp");
+//			dispathcer.forward(request,response);
+			
+			
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script type=\"text/javascript\">");  
+
+			out.println("alert(\"Incorrect Credentials! Login Failed!\");") ; 
+			out.println("window.location.href = \"/BuyMe/login\";");
+			out.println("</script>;");
+
 		}
 		
 	}

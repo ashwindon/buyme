@@ -8,10 +8,15 @@
 </head>
 <body>
 	<% 
+		response.setHeader("Cache-Control","no-cache");
+	  	response.setHeader("Cache-Control","no-store");
+	  	response.setHeader("Pragma","no-cache");
+	  	response.setDateHeader ("Expires", 0);
 		String email = (String) session.getAttribute("email");
+		
 		if(email==null)
 		{
-			response.sendRedirect("Login.jsp");
+			response.sendRedirect("/BuyMe/login");
 		}
 	%>
 	<h1>Welcome <%=email %> </h1>
