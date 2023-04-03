@@ -62,10 +62,14 @@ public class UserLogin extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(success == 1) {
+		if(success > 0) {
 			//System.out.println("User login was successful and returned success = 1 ... redirecting to dashboard");
 			HttpSession session=request.getSession();
 			session.setAttribute("email",email);
+			//userRole = 1 = end user
+			//userRole = 2 = staff
+			//userRole = 3 = admin
+			session.setAttribute("role", success);
 //			RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/Dashboard.jsp");
 //			dispathcer.forward(request,response);
 			response.sendRedirect("/BuyMe/Dashboard");

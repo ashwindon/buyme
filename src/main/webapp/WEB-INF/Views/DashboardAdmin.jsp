@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>MyDashboard</title>
+<title>Admin Dashboard</title>
 </head>
 <body>
-<h1>This is User Dashboard!</h1>
+	<h1>This is Admin Dashboard!</h1>
 	<% 
 		response.setHeader("Cache-Control","no-cache");
 	  	response.setHeader("Cache-Control","no-store");
@@ -22,5 +22,7 @@
 	%>
 	<h1>Welcome <%=email %> </h1>
 	<a href="login">Logout</a>
+	<br>
+	<a href="createNewUser">Create New Staff Member Profile</a>
 </body>
 </html>

@@ -9,6 +9,7 @@
 <body>
 	<%
 	session.setAttribute("email",null);
+	session.setAttribute("role",null);
 	session.invalidate();
 	%>
 	<div style = "display: flex; justify-content: center;">

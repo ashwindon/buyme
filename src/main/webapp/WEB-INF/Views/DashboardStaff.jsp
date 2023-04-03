@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>MyDashboard</title>
+<title>Staff Dashboard</title>
 </head>
 <body>
-<h1>This is User Dashboard!</h1>
+<h1>This is Staff Dashboard!</h1>
 	<% 
 		response.setHeader("Cache-Control","no-cache");
 	  	response.setHeader("Cache-Control","no-store");

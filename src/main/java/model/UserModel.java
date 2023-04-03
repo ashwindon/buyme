@@ -19,12 +19,7 @@ public class UserModel {
 	public void setPhone_no(String phone_no) {
 		this.phone_no = phone_no;
 	}
-	public int getUid() {
-		return uid;
-	}
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
+
 	public String getPassword_hash() {
 		return password_hash;
 	}
@@ -37,10 +32,16 @@ public class UserModel {
 	public void setUnique_salt(String unique_salt) {
 		this.unique_salt = unique_salt;
 	}
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	private String name;
 	private String email;
 	private String phone_no;
-	private int uid;
+	private int isAdmin;
 	private String password_hash;
 	private String unique_salt;
 }

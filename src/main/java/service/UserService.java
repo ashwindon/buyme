@@ -10,7 +10,7 @@ public class UserService {
 	
 	public int createNewUser(UserModel user) throws ClassNotFoundException{
 		String CREATE_NEW_USER_QUERY = "INSERT INTO user" + " (name, email, phone_no, password_hash, unique_salt) 	VALUES" + " (?,?,?,?,?);";
-		
+		String CREATE_NEW_STAFF_QUERY = "INSERT INTO staff" + " (name, email, phone_no, password_hash, unique_salt, isAdmin) 	VALUES" + " (?,?,?,?,?,?);";
 		int success = 0;
 		
 		
@@ -18,8 +18,13 @@ public class UserService {
 		try {
 			DatabaseConnection db = new DatabaseConnection();	
 			Connection con = db.getConnection();
-			
-			PreparedStatement preparedStatement = con.prepareStatement(CREATE_NEW_USER_QUERY);
+			PreparedStatement preparedStatement = null;
+			if(user.getIsAdmin() == 3) {
+				preparedStatement = con.prepareStatement(CREATE_NEW_STAFF_QUERY);
+			}else if(user.getIsAdmin() == 1) {
+				preparedStatement = con.prepareStatement(CREATE_NEW_USER_QUERY);
+			}
+			//PreparedStatement preparedStatement = con.prepareStatement(CREATE_NEW_STAFF_QUERY);
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getEmail());
 			preparedStatement.setString(3, user.getPhone_no());
@@ -27,6 +32,10 @@ public class UserService {
 			preparedStatement.setString(5, user.getUnique_salt());
 			user.setPassword_hash(generatePasswordHash(user.getPassword_hash(),user.getUnique_salt()));
 			preparedStatement.setString(4, user.getPassword_hash());
+			if(user.getIsAdmin() == 3) {
+				preparedStatement.setInt(6,0);				
+			}
+
 
 			System.out.println(preparedStatement);
 			
@@ -69,10 +78,20 @@ public class UserService {
 		
 		String email = userModel.getEmail();
 		System.out.println("Received email in service as : "+ email);
+		String GET_USER_DATA;
+		if(email.split("@")[1].equals("buyme.com")) {
+			//staff is logging in
+			//verify credentials from staff table
+			GET_USER_DATA = "SELECT * FROM staff WHERE email = \"" + email +"\";";
+		}else {
+			//user is trying to login
+			//verify credentials from user table
+			GET_USER_DATA = "SELECT * FROM user WHERE email = \"" + email +"\";";
+		}
 		String password = userModel.getPassword_hash();
 		System.out.println("Received password in service as : "+password);
 		//now first check if the user exists in the database
-		String GET_USER_DATA = "SELECT * FROM user WHERE email = \"" + email +"\";";
+		//String GET_USER_DATA = "SELECT * FROM user WHERE email = \"" + email +"\";";
 		System.out.println("Printing query : " + GET_USER_DATA);
 		try {
 			DatabaseConnection db = new DatabaseConnection();	
@@ -90,6 +109,17 @@ public class UserService {
 			if(resultSet.next()) {
 				//System.out.println("We did not come here!");
 				String resultSetEmail = resultSet.getString("email");
+				if(email.split("@")[1].equals("buyme.com")) {
+					int userRole = resultSet.getInt("isAdmin");
+					if(userRole == 0) {
+						success = 2;
+					}else {
+						success = 3;
+					}
+				}else {
+					success = 1;
+				}
+				//int userRole = resultSet.getInt("isAdmin");
 				System.out.println("Printing email : "+resultSetEmail);
 				if(resultSetEmail == null) {
 					System.out.println("Got null in resultSet email");
@@ -110,7 +140,7 @@ public class UserService {
 						//password is correct ... login the user
 						//create httpSession and stuff
 						System.out.println("Password match successful returning success");
-						success = 1;
+						//success = 1;
 						return success;
 					}else {
 						//password is wrong
