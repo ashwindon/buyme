@@ -1,6 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+//import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
@@ -50,14 +54,26 @@ public class SellProduct extends HttpServlet {
 		String product_title = request.getParameter("product_title");
 		String product_desc = request.getParameter("product_desc");
 		String product_type = request.getParameter("product_type");
+		String product_brand = request.getParameter("product_brand");
+		//System.out.println("Product brand from HTML : "+product_brand);
 		String product_color = request.getParameter("product_color");
 		String product_model = request.getParameter("product_model");
 		double starting_bid_price = Double.parseDouble(request.getParameter("starting_bid_price"));
 		double secret_min_price = Double.parseDouble(request.getParameter("secret_min_price"));
 		double min_bid_increment = Double.parseDouble(request.getParameter("min_bid_increment"));
+		//String end_date = request.getParameter("end_date");
+		String end_time = request.getParameter("end_time");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date end_date = null;
+		try {
+			end_date = format.parse(request.getParameter("end_date"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-		ProductModel productModel = new ProductModel(email, product_title, product_desc, product_type, product_color, 
-				product_model,starting_bid_price,secret_min_price,min_bid_increment);
+		ProductModel productModel = new ProductModel(email, product_title, product_desc, product_type, product_brand, product_color, 
+				product_model,starting_bid_price,secret_min_price,min_bid_increment,end_date,end_time);
 		int success = 0;
 		try {
 			success = productSercvice.createNewProduct(productModel);
