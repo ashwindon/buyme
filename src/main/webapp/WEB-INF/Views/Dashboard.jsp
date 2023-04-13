@@ -21,10 +21,13 @@
 		}
 	%>
 	<h1>Welcome <%=email %> </h1>
-	<a href="sell">Auction your own product?</a>
-	<br>
-	<a href="BuyProduct">Buy some products?</a>
-	<br>
-	<a href="login">Logout</a>
+	<button onclick="window.location.href='sell'">Auction your own product?</button>
+	<br><br>
+	<button onclick="window.location.href='BuyProduct'">Buy some products?</button>
+	<br><br>
+	<button onclick="window.location.href='UserBid'">Your Bids</button>
+	<br><br>
+	<button onclick="window.location.href='login'">Logout</button>
+	
 </body>
 </html>
