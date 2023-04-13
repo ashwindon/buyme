@@ -62,6 +62,7 @@ public class BuyProduct extends HttpServlet {
 		int success = 0;
 		try {
 			success = bidservice.createNewBid(bidModel);
+			success = bidservice.updateBids();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

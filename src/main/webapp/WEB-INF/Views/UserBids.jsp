@@ -29,7 +29,7 @@
 				String user_email = session.getAttribute("email").toString();
 				out.println("<h1>" + user_email+ "</h1>");
 
-				String GET_ALL_DISTINCT_USER_BIDS = "select distinct product_title, product_type, product_brand, product_color, product_model, current_bid, max_bid_amount from biddings bid join product prod on bid.pid = prod.pid where prod.status = \"ACTIVE\" and bid.email=\"" + user_email + "\";";
+				String GET_ALL_DISTINCT_USER_BIDS = "select distinct bid.pid, product_title, product_type, product_brand, product_color, product_model, current_bid, max_bid_amount from biddings bid join product prod on bid.pid = prod.pid where prod.status = \"active\" and bid.email=\"" + user_email + "\";";
 				
 				DatabaseConnection db = new DatabaseConnection();	
 				Connection con = db.getConnection();
@@ -52,8 +52,11 @@
                     //out.println("<td>" + rs.getString("starting_bid_price") + "</td>");
                     out.println("<td>" + rs.getString("current_bid") + "</td>");
                     out.println("<td>" + rs.getString("max_bid_amount") + "</td>");
-                    out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"post\">");
+                    out.println("<form action=\""+request.getContextPath()+"/UserBid\" method=\"post\">");
                     out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\" required /></td>");
+                    out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
+					out.println("<input type = \"hidden\" name = \"email\" value=\""+user_email+"\"/>");
+                    out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+rs.getString("current_bid")+"\"/>");
                     out.println("<td><input type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
                     out.println("</form>");
                     out.println("</tr>");
