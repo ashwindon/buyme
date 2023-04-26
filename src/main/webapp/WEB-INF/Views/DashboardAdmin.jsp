@@ -21,8 +21,14 @@
 		}
 	%>
 	<h1>Welcome <%=email %> </h1>
-	<a href="login">Logout</a>
-	<br>
-	<a href="createNewUser">Create New Staff Member Profile</a>
+	<button onclick="window.location.href='createNewUser'">Create New Staff Member Profile</button>
+	<br><br>
+	<button onclick="window.location.href='AdminReportBrands'">Brand Sales Report</button>
+	<br><br>
+	<button onclick="window.location.href='AdminReportModels'">Model Sales Report</button>
+	<br><br>
+	<button onclick="window.location.href='AdminReportUsers'">User Sales Report</button>
+	<br><br>
+	<button onclick="window.location.href='login'">Logout</button>
 </body>
 </html>
