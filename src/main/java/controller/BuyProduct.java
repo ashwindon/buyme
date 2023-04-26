@@ -50,15 +50,29 @@ public class BuyProduct extends HttpServlet {
 		//doGet(request, response);
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		String email = request.getSession().getAttribute("email").toString();
-		double max_bid_amnt = Double.parseDouble(request.getParameter("bid_amount"));
+		//String maximum_bid_amt = request.getParameter("bid_amount");
+		double max_bid_amnt;
+		//System.out.println(request.getParameter("bid_amount"));
+		if(request.getParameter("bid_amount").isEmpty())
+			max_bid_amnt = -1;
+		else
+			max_bid_amnt = Double.parseDouble(request.getParameter("bid_amount"));
 		double current_bid = Double.parseDouble(request.getParameter("current_bid"));
-		
-		
+		String buttonClicked = request.getParameter("bid_action");
+		double min_amount_you_must_bid = Double.parseDouble(request.getParameter("min_amount_you_must_bid"));
 		Date date = new Date();  
         Timestamp ts=new Timestamp(date.getTime()); 
-		System.out.println("BuyProduct Post Service <3 Email: "+ email + ", Product Id: "+ pid+", Max Bid amt: "+max_bid_amnt + ", Timestamp: "+ts);
+		System.out.println("BuyProduct Post Service <3 Email: "+ email + ", Product Id: "+ pid+", Max Bid amt: "+max_bid_amnt + ", Bid Action:" + buttonClicked + ", Timestamp: "+ts);
 		
-		BidModel bidModel = new BidModel(pid,email, current_bid , max_bid_amnt, ts);
+		BidModel bidModel;
+		if("Auto Bid".equals(buttonClicked))
+		{
+			 bidModel = new BidModel(pid,email, current_bid , max_bid_amnt, ts);
+		}
+		else 
+		{
+			 bidModel = new BidModel(pid,email, min_amount_you_must_bid , min_amount_you_must_bid, ts);
+		}
 		int success = 0;
 		try {
 			success = bidservice.createNewBid(bidModel);

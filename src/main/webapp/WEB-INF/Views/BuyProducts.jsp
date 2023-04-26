@@ -23,7 +23,7 @@
 			<th>Colour</th>
 			<th>Current Highest Bid</th>
 			<th>Min Amount You Must Bid</th>
-			<th>Enter the Bidding amount to participate</th>
+			<th>Max Amount For Autobidding</th>
 			<th>Action</th>
 		</tr>
 		<%
@@ -106,13 +106,15 @@
 								out.println("<td>" + current_highest_bid + "</td>");
 								out.println("<td>" + min_amount_you_must_bid + "</td>");
 								out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"post\">");
-								out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\" required /></td>");
-								out.println("<td><input type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
+								out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\"/></td>");
+								out.println("<td><input type = \"submit\" name = \"bid_action\" value = \"Auto Bid\"/>&nbsp<input type = \"submit\" name=\"bid_action\" value = \"Manual bid\"/></td>");
+								//out.println("<td><input type = \"submit\" name=\"manual_bid\" value = \"Place Manual Bid\" placeholder = \"Place Manual Bid\"/></td>");
 								out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
 								//If its a first bid for a product, then pick the starting bid price
 								//else pick the latest bid for that product as current_bid
 								//out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+rs.getString("starting_bid_price")+"\"/>");
-								out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+current_highest_bid+"\"/>");		
+								out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+current_highest_bid+"\"/>");
+								out.println("<input type = \"hidden\" name = \"min_amount_you_must_bid\" value=\""+min_amount_you_must_bid+"\"/>");
 								out.println("</form>");
 								out.println("</tr>");
 							}
@@ -133,13 +135,15 @@
 							out.println("<td>" + current_highest_bid + "</td>");
 							out.println("<td>" + min_amount_you_must_bid + "</td>");
 							out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"post\">");
-							out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\" required /></td>");
-							out.println("<td><input type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
+							out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\"/></td>");
+							out.println("<td><input type = \"submit\" name = \"bid_action\" value = \"Auto Bid\"/>&nbsp<input type = \"submit\" name=\"bid_action\" value = \"Manual bid\"/></td>");
+							//out.println("<td><input type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
 							out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
 							//If its a first bid for a product, then pick the starting bid price
 							//else pick the latest bid for that product as current_bid
 							//out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+rs.getString("starting_bid_price")+"\"/>");
-							out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+current_highest_bid+"\"/>");		
+							out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+current_highest_bid+"\"/>");
+							out.println("<input type = \"hidden\" name = \"min_amount_you_must_bid\" value=\""+min_amount_you_must_bid+"\"/>");
 							out.println("</form>");
 							out.println("</tr>");
 						}
@@ -149,6 +153,11 @@
 				if(!display)
 				{
 					out.println("<h3>No Listings avaiable! Try again Later</h3>");
+				}
+				else
+				{
+					out.println("<p>* In order to Enter Automatic Bidding, please enter the Max. upper limit you are comfortable with</p>");
+					out.println("<p>** Clicking on Manual Bidding Would place a bid equal to amount in \"Min Amount You Must Bid Column\" in the above table</p>");
 				}
 				
 			}catch(Exception e){
