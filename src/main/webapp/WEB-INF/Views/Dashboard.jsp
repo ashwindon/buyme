@@ -27,6 +27,8 @@
 	<br><br>
 	<button onclick="window.location.href='UserBid'">Your Bids</button>
 	<br><br>
+	<button onclick="window.location.href='UserHistory'">Other users history</button>
+	<br><br>
 	<button onclick="window.location.href='login'">Logout</button>
 	
 </body>
