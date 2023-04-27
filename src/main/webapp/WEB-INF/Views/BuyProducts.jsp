@@ -20,8 +20,7 @@
 		out.print("<br><br>Search Product: <input type=\"input\" name=\"brand_search\" placeholder = \"brand name\"/>&nbsp&nbsp<input type=\"input\" name=\"type_search\" placeholder = \"type\"/>" + 
 					"&nbsp&nbsp<input type=\"input\" name=\"model_search\" placeholder = \"model\"/>&nbsp&nbsp<input type=\"input\" name=\"color_search\" placeholder = \"color\"/>" + 
 					"&nbsp&nbsp <input type = \"submit\" name = \"search\" value = \"search\"/>");
-		out.print("</form>");
-		out.println("<br><form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\"> <input type = \"submit\" value=\"clear\"/> </form>");
+		out.print("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\"> <input type = \"submit\" value=\"clear\"/> </form></form>");
 	%>
 
 	<table border="5px" cellspacing="10px" cellpadding="10px">
