@@ -64,45 +64,87 @@ public class BidService {
 	{
 		//execute query to get updated bids
 		String query = "select distinct inter2.email, inter2.pid,\n" +
-						"case when inter2.second_max_bid_amount='' then inter2.current_bid\n" +
-						"	when inter2.user_max_bid < inter2.prod_max_bid_amount then inter2.user_max_bid\n" +
-						"	else\n" + 
-						"		case when  inter2.second_max_bid_amount + inter2.min_incr < inter2.user_max_bid then inter2.second_max_bid_amount + inter2.min_incr\n" +
-						"		else inter2.user_max_bid end\n" +
-						"end as current_bid,\n" +
-						"inter2.user_max_bid\n" +
-						"from \n" +
-						"(\n" +
-						"	select inter.email,inter.pid,inter.current_bid, inter.max_bid_amount as user_max_bid,\n" +
-						"	inter.prod_max_bid_amount, inter.second_max_bid_amount, inter.min_incr\n" +
-						"	from \n" +
-						"	(\n" +
-						"		select A.*, coalesce(B.max_bid_amount,'') as prod_max_bid_amount, \n" +
-						"		coalesce(C.max_bid_amount,'') as second_max_bid_amount  \n" +
-						"		from\n" +
-						"		(\n" +
-						"			select bid.*,prod.min_bid_increment as min_incr from biddings bid \n" +
-						"			join product prod on bid.pid = prod.pid\n" +
-						"			and upper(trim(prod.status)) = \"active\" \n" +
-						"		)A\n" +
-						"		join \n" +
-						"		(\n" +
-						"			select A.* from \n" +
-						"			(\n" +
-						"				select *,row_number() over(partition by pid order by max_bid_amount desc) as rn\n" +
-						"				from biddings \n" +
-						"			)A where A.rn = 1\n" +
-						"		)B on B.pid = A.pid\n" +
-						"		left join\n" +
-						"		(\n" +
-						"			select A.* from \n" +
-						"			(\n" +
-						"				select *,dense_rank() over(partition by pid order by max_bid_amount desc) as rn\n" +
-						"				from biddings \n" +
-						"			)A where A.rn = 2\n" +
-						"		)C on A.pid = C.pid\n" +
-						"	)inter\n" +
-						")inter2\n;";
+				"case when inter2.second_max_bid_amount='' and inter2.second_max_bid_amount_rn=1 then inter2.current_bid\n" +
+				"when inter2.second_max_bid_amount='' and inter2.second_max_bid_amount_rn<>1 then inter2.user_max_bid\n" +
+				"	when inter2.user_max_bid < inter2.prod_max_bid_amount then inter2.user_max_bid\n" +
+				"	else\n" + 
+				"		case when  inter2.second_max_bid_amount + inter2.min_incr < inter2.user_max_bid then inter2.second_max_bid_amount + inter2.min_incr\n" +
+				"		else inter2.user_max_bid end\n" +
+				"end as current_bid,\n" +
+				"inter2.user_max_bid\n" +
+				"from \n" +
+				"(\n" +
+				"	select inter.email,inter.pid,inter.current_bid, inter.max_bid_amount as user_max_bid,\n" +
+				"	inter.prod_max_bid_amount, inter.second_max_bid_amount, inter.min_incr, inter.second_max_bid_amount_rn\n" +
+				"	from \n" +
+				"	(\n" +
+				"		select A.*, coalesce(B.max_bid_amount,'') as prod_max_bid_amount, \n" +
+				"		coalesce(C.max_bid_amount,'') as second_max_bid_amount, coalesce(C.rn, 1) as second_max_bid_amount_rn  \n" +
+				"		from\n" +
+				"		(\n" +
+				"			select bid.*,prod.min_bid_increment as min_incr from biddings bid \n" +
+				"			join product prod on bid.pid = prod.pid\n" +
+				"			and upper(trim(prod.status)) = \"active\" \n" +
+				"		)A\n" +
+				"		join \n" +
+				"		(\n" +
+				"			select A.* from \n" +
+				"			(\n" +
+				"				select *,row_number() over(partition by pid order by max_bid_amount desc) as rn\n" +
+				"				from biddings \n" +
+				"			)A where A.rn = 1\n" +
+				"		)B on B.pid = A.pid\n" +
+				"		left join\n" +
+				"		(\n" +
+				"			select A.* from \n" +
+				"			(\n" +
+				"				select *,row_number() over(partition by pid order by max_bid_amount desc) as rn\n" +
+				"				from biddings \n" +
+				"			)A where A.rn = 2\n" +
+				"		)C on A.pid = C.pid\n" +
+				"	)inter\n" +
+				")inter2\n;";
+//		String query = "select distinct inter2.email, inter2.pid,\n" +
+//						"case when inter2.second_max_bid_amount='' then inter2.current_bid\n" +
+//						"	when inter2.user_max_bid < inter2.prod_max_bid_amount then inter2.user_max_bid\n" +
+//						"	else\n" + 
+//						"		case when  inter2.second_max_bid_amount + inter2.min_incr < inter2.user_max_bid then inter2.second_max_bid_amount + inter2.min_incr\n" +
+//						"		else inter2.user_max_bid end\n" +
+//						"end as current_bid,\n" +
+//						"inter2.user_max_bid\n" +
+//						"from \n" +
+//						"(\n" +
+//						"	select inter.email,inter.pid,inter.current_bid, inter.max_bid_amount as user_max_bid,\n" +
+//						"	inter.prod_max_bid_amount, inter.second_max_bid_amount, inter.min_incr\n" +
+//						"	from \n" +
+//						"	(\n" +
+//						"		select A.*, coalesce(B.max_bid_amount,'') as prod_max_bid_amount, \n" +
+//						"		coalesce(C.max_bid_amount,'') as second_max_bid_amount  \n" +
+//						"		from\n" +
+//						"		(\n" +
+//						"			select bid.*,prod.min_bid_increment as min_incr from biddings bid \n" +
+//						"			join product prod on bid.pid = prod.pid\n" +
+//						"			and upper(trim(prod.status)) = \"active\" \n" +
+//						"		)A\n" +
+//						"		join \n" +
+//						"		(\n" +
+//						"			select A.* from \n" +
+//						"			(\n" +
+//						"				select *,row_number() over(partition by pid order by max_bid_amount desc) as rn\n" +
+//						"				from biddings \n" +
+//						"			)A where A.rn = 1\n" +
+//						"		)B on B.pid = A.pid\n" +
+//						"		left join\n" +
+//						"		(\n" +
+//						"			select A.* from \n" +
+//						"			(\n" +
+//						"				select *,dense_rank() over(partition by pid order by max_bid_amount desc) as rn\n" +
+//						"				from biddings \n" +
+//						"			)A where A.rn = 2\n" +
+//						"		)C on A.pid = C.pid\n" +
+//						"	)inter\n" +
+//						")inter2\n;";
+		
 
 		int success = 0;
 		try {

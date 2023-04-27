@@ -63,11 +63,11 @@ public class BuyProduct extends HttpServlet {
 		Date date = new Date();  
         Timestamp ts=new Timestamp(date.getTime()); 
 		System.out.println("BuyProduct Post Service <3 Email: "+ email + ", Product Id: "+ pid+", Max Bid amt: "+max_bid_amnt + ", Bid Action:" + buttonClicked + ", Timestamp: "+ts);
-		
+		System.out.println("Min Amt You must bid: " + min_amount_you_must_bid);
 		BidModel bidModel;
 		if("Auto Bid".equals(buttonClicked))
 		{
-			 bidModel = new BidModel(pid,email, current_bid , max_bid_amnt, ts);
+			 bidModel = new BidModel(pid,email, min_amount_you_must_bid , max_bid_amnt, ts);
 		}
 		else 
 		{
