@@ -13,6 +13,7 @@
 </head>
 <body>
 	<h1>Admin Reports: Brand Sales Report </h1>
+    <button onclick="window.location.href='Dashboard'">Dashboard</button><br>
 		<%
 			try{
                 //String GET_TOTAL_EARNINGS = "SELECT SUM(b.final_price) AS total_earnings FROM buys;";

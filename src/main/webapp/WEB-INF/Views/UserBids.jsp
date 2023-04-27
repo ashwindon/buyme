@@ -12,6 +12,7 @@
 </head>
 <body>
 	<h1>Your Bids</h1>
+	<button onclick="window.location.href='Dashboard'">Dashboard</button><br><br>
 	<table border="5px" cellspacing="10px" cellpadding="10px">
 		<tr>
 			<th>Title</th>

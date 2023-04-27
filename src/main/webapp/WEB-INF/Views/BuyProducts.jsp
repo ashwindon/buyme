@@ -13,7 +13,7 @@
 </head>
 <body>
 	<h1>List of Available Products</h1>
-
+	<button onclick="window.location.href='Dashboard'">Dashboard</button><br><br>
 	<%
 		out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\">");
 		out.println("Sort By: " + "<input type = \"submit\" name = \"price\" value = \"price\"/>&nbsp&nbsp<input type = \"submit\" name=\"brand\" value = \"brand\"/>");
@@ -82,7 +82,6 @@
 				}
 
 				if(request.getParameter("brand") != null) {
-					out.println("sort by price!");
 					GET_PRODUCT_DATA = "SELECT * FROM product where status = \"active\" ORDER BY product_brand, starting_bid_price;";
 				}
 

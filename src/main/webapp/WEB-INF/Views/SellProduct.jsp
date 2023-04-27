@@ -20,6 +20,7 @@
 		}
 	%>
 <h1>Welcome <%=email %> to BuyMe!</h1>
+<button onclick="window.location.href='Dashboard'">Dashboard</button><br><br>
 <h4>Enter the product details to list it:</h4>
 
 <form action="<%= request.getContextPath() %>/sell" method = "post" >	
