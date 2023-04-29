@@ -19,8 +19,10 @@
 		{
 			response.sendRedirect("/BuyMe/login");
 		}
-	%>
+	%>	
 	<h1>Welcome <%=email %> </h1>
+	<button onclick="window.location.href='UserNotifications'">My Notifications</button>
+	<br><br>
 	<button onclick="window.location.href='sell'">Auction your own product?</button>
 	<br><br>
 	<button onclick="window.location.href='BuyProduct'">Buy some products?</button>
