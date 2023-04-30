@@ -27,6 +27,8 @@
 	<br><br>
 	<button onclick="window.location.href='BuyProduct'">Buy some products?</button>
 	<br><br>
+	<button onclick="window.location.href='UserInterest'">User interest</button>
+	<br><br>
 	<button onclick="window.location.href='UserBid'">Your Bids</button>
 	<br><br>
 	<button onclick="window.location.href='UserHistory'">Other users history</button>

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.BidModel;
+import model.InterestModel;
 import service.BidService;
+import service.InterestService;
 import service.UserNotificationManager;
 
 import java.sql.Timestamp;    
@@ -25,6 +27,7 @@ import java.util.Date;
 public class BuyProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private BidService bidservice = new BidService();
+	private InterestService interestSercvice = new InterestService();
     private UserNotificationManager userNotificationManager = new UserNotificationManager();
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +42,25 @@ public class BuyProduct extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(request.getParameter("save") != null) {
+			String brand = request.getParameter("brand_search");
+			String type = request.getParameter("type_search");
+			String model = request.getParameter("model_search");
+			String color = request.getParameter("color_search");
+			String email = request.getSession().getAttribute("email").toString();;
+
+			InterestModel interestModel = new InterestModel(email, brand, type, color, model);
+			
+			int success = 0;
+			try {
+				System.out.println("Calling add interested product");
+				success = interestSercvice.addInterestedProduct(interestModel);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/BuyProducts.jsp");
 		dispathcer.forward(request,response);

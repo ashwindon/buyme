@@ -20,19 +20,11 @@ public class AuctionService {
             while(resultSet.next()){
                 //get min add amount from the product table
                 //get all bidders for the product in  sorted order of time
-                String GET_ALL_BIDDERS = "SELECT * FROM biddings where pid = ";
-
             }
         }
         catch(Exception e) {
 			e.printStackTrace();
 		}
-        
-        
-
-
-        
-
     }
 
 }
