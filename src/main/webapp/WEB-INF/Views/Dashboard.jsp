@@ -91,6 +91,7 @@ ul.topnav li.right {float: right;}
 		<li><a href="UserInterest">Interested</a></li>
 		<li><a href="UserBid">Your Bids</a></li>
 		<li><a href="UserHistory">History</a></li>
+		<li><a href="qna">QnA</a></li>
 		<li class="right"><a href="login">Logout</a></li>
 	  </ul>
 
