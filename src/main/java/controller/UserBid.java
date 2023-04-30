@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.BidModel;
 import service.BidService;
+import service.UserNotificationManager;
 
 import java.sql.Timestamp;    
 import java.util.Date; 
@@ -22,7 +23,8 @@ import java.util.Date;
 @WebServlet("/UserBid")
 public class UserBid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private BidService bidservice = new BidService();  
+    private BidService bidservice = new BidService();
+    private UserNotificationManager userNotificationManager = new UserNotificationManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -62,6 +64,7 @@ public class UserBid extends HttpServlet {
 		try {
 			success = bidservice.updateMaxBid(bidModel);
 			success = bidservice.updateBids();
+			userNotificationManager.SendNotifications(pid, email);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
