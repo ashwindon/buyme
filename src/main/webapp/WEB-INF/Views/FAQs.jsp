@@ -63,8 +63,10 @@
                            out.println("<p><i>Answer:</i>&nbsp&nbsp" + rs.getString("answer") + "</p>");
                        }
                        if(!display) {
-                           out.println("<h3>No Prior Question Exists</h3>");
+                           //out.println("<h3>No Prior Question Exists</h3>");
                            //Direct to Customer - Rep to raise a question
+                    	   out.println("<br><h2>No Question with entered keyword exists! Kindly post the Question for the staff to answer.</h2><br>");
+                    	   out.println("<button onclick=\"window.location.href='AskQuestions'\">Ask a Question to Staff</button>");
                        }
                    }
                    else {
