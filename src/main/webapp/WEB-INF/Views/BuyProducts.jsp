@@ -246,7 +246,7 @@
 				
 				if(!display)
 				{
-					out.println("<h3>No Listings avaiable! Try again Later</h3>");
+					out.println("<h3 align=\"center\">No Listings avaiable! Try again Later</h3>");
 				}
 				else
 				{

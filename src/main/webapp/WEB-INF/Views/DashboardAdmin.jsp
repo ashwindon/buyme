@@ -71,6 +71,7 @@ ul.topnav li.right {float: right;}
 	<div class="header"><h1>Buy Me</h1></div>
 	<ul class="topnav">
 		<li><a class="active" href="">Home</a></li>
+		<li><a href="createNewUser">Create Staff</a></li>
 		<li><a href="AdminReportBrands">Brand Sales Report</a></li>
 		<li><a href="AdminReportModels">Model Sales Report</a></li>
 		<li><a href="AdminReportUsers">User Sales Report</a></li>
