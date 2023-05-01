@@ -82,9 +82,9 @@ ul.topnav li.right {float: right;}
 	session.invalidate();
 	%>
 	<div class="header"><h1>Buy Me</h1></div>
-	<ul class="topnav">
+	<!--  <ul class="topnav">
 		<li><a class="active" href="">Home</a></li>
-	</ul>
+	</ul>-->
 	<div class="login">
 		<h1>User Login</h1>
 		<form action="<%= request.getContextPath() %>/login" method = "post">

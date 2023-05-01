@@ -121,7 +121,7 @@
 				}
 				if(!display)
 				{
-					out.println("<h3>No Listings avaiable! Try again Later</h3>");
+					out.println("<h3><center>No Listings avaiable! Try again Later</center></h3>");
 				}
 				
 			}catch(Exception e){
