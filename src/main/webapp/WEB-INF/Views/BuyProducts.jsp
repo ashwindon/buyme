@@ -10,21 +10,79 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Buy Products</title>
+<style>
+    body {
+        margin: 0;
+        background: #6cc9c7;
+    }
+    
+    ul.topnav {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    ul.topnav li {float: left;}
+    
+    ul.topnav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    ul.topnav li a:hover:not(.active) {background-color: #111;}
+    
+    ul.topnav li a.active {background-color: #04AA6D;}
+    
+    ul.topnav li.right {float: right;}
+    
+    @media screen and (max-width: 600px) {
+      ul.topnav li.right, 
+      ul.topnav li {float: none;}
+    }
+    
+    .header {
+      padding: 10px;
+      text-align: center;
+      background: #6cc9c7;
+    }
+    
+    .button1{
+      background-color: #333;
+      border: none;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      font-size: small;
+      border-radius: 8px;
+    }
+</style>
 </head>
 <body>
-	<h1>List of Available Products</h1>
-	<button onclick="window.location.href='Dashboard'">Dashboard</button><br><br>
+	<div class="header"><h1>Buy Me</h1></div>
+    <ul class="topnav">
+		<li><a class="active" href="Dashboard">Home</a></li>
+	</ul>
+	<h1 align="center">List of Available Products</h1>
 	<%
-		out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\">");
-		out.println("Sort By: " + "<input type = \"submit\" name = \"price\" value = \"price\"/>&nbsp&nbsp<input type = \"submit\" name=\"brand\" value = \"brand\"/>");
+		out.println("<form align=\"center\" action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\">");
+		out.println("Sort By: " + "<input class= \"button1\" type = \"submit\" name = \"price\" value = \"price\"/>&nbsp&nbsp<input class= \"button1\" type = \"submit\" name=\"brand\" value = \"brand\"/>");
 		out.print("<br><br>Search Product: <input type=\"input\" name=\"brand_search\" placeholder = \"brand name\"/>&nbsp&nbsp<input type=\"input\" name=\"type_search\" placeholder = \"type\"/>" + 
 					"&nbsp&nbsp<input type=\"input\" name=\"model_search\" placeholder = \"model\"/>&nbsp&nbsp<input type=\"input\" name=\"color_search\" placeholder = \"color\"/>" + 
-					"&nbsp&nbsp <input type = \"submit\" name = \"search\" value = \"search\"/>");
-		out.print("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\"> <input type = \"submit\" name=\"save\" value=\"save as interested\"/>");
-		out.print("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\"> <input type = \"submit\" value=\"clear\"/> </form></form></form>");
+					"&nbsp&nbsp <input class= \"button1\" type = \"submit\" name = \"search\" value = \"search\"/>");
+		out.print("<form align=\"center\" action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\"> <input class= \"button1\" type = \"submit\" name=\"save\" value=\"save as interested\"/>");
+		out.print("<form align=\"center\" action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\"> <input class= \"button1\" type = \"submit\" value=\"clear\"/> </form></form></form>");
 	%>
 
-	<table border="5px" cellspacing="10px" cellpadding="10px">
+	<table align="center" border="5px" cellspacing="10px" cellpadding="10px">
 		<tr>
 			<th>Title</th>
 			<th>Description</th>
@@ -143,8 +201,8 @@
 								out.println("<td>" + min_amount_you_must_bid + "</td>");
 								out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"post\">");
 								out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\"/></td>");
-								out.println("<td><input type = \"submit\" name = \"bid_action\" value = \"Auto Bid\"/>&nbsp<input type = \"submit\" name=\"bid_action\" value = \"Manual bid\"/></td>");
-								//out.println("<td><input type = \"submit\" name=\"manual_bid\" value = \"Place Manual Bid\" placeholder = \"Place Manual Bid\"/></td>");
+								out.println("<td><input class= \"button1\" type = \"submit\" name = \"bid_action\" value = \"Auto Bid\"/>&nbsp<input class= \"button1\" type = \"submit\" name=\"bid_action\" value = \"Manual bid\"/></td>");
+								//out.println("<td><input class= \"button1\" type = \"submit\" name=\"manual_bid\" value = \"Place Manual Bid\" placeholder = \"Place Manual Bid\"/></td>");
 								out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
 								//If its a first bid for a product, then pick the starting bid price
 								//else pick the latest bid for that product as current_bid
@@ -172,8 +230,8 @@
 							out.println("<td>" + min_amount_you_must_bid + "</td>");
 							out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"post\">");
 							out.println("<td><input type = \"number\" name = \"bid_amount\" placeholder = \"Bid Amount\"/></td>");
-							out.println("<td><input type = \"submit\" name = \"bid_action\" value = \"Auto Bid\"/>&nbsp<input type = \"submit\" name=\"bid_action\" value = \"Manual bid\"/></td>");
-							//out.println("<td><input type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
+							out.println("<td><input class= \"button1\" type = \"submit\" name = \"bid_action\" value = \"Auto Bid\"/>&nbsp<input class= \"button1\" type = \"submit\" name=\"bid_action\" value = \"Manual bid\"/></td>");
+							//out.println("<td><input class= \"button1\" type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
 							out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
 							//If its a first bid for a product, then pick the starting bid price
 							//else pick the latest bid for that product as current_bid
@@ -192,8 +250,8 @@
 				}
 				else
 				{
-					out.println("<p>* In order to Enter Automatic Bidding, please enter the Max. upper limit you are comfortable with</p>");
-					out.println("<p>** Clicking on Manual Bidding Would place a bid equal to amount in \"Min Amount You Must Bid Column\" in the above table</p>");
+					out.println("<p align=\"center\">* In order to Enter Automatic Bidding, please enter the Max. upper limit you are comfortable with</p>");
+					out.println("<p align=\"center\">** Clicking on Manual Bidding Would place a bid equal to amount in \"Min Amount You Must Bid Column\" in the above table</p>");
 				}
 				
 			}catch(Exception e){

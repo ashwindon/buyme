@@ -8,12 +8,70 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Buy Products</title>
+<title>Bids</title>
+<style>
+    body {
+        margin: 0;
+        background: #6cc9c7;
+    }
+    
+    ul.topnav {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    ul.topnav li {float: left;}
+    
+    ul.topnav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    ul.topnav li a:hover:not(.active) {background-color: #111;}
+    
+    ul.topnav li a.active {background-color: #04AA6D;}
+    
+    ul.topnav li.right {float: right;}
+    
+    @media screen and (max-width: 600px) {
+      ul.topnav li.right, 
+      ul.topnav li {float: none;}
+    }
+    
+    .header {
+      padding: 10px;
+      text-align: center;
+      background: #6cc9c7;
+    }
+    
+    .button1{
+      background-color: #333;
+      border: none;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      font-size: small;
+      border-radius: 8px;
+    }
+</style>
 </head>
 <body>
-	<h1>Your Bids</h1>
-	<button onclick="window.location.href='Dashboard'">Dashboard</button><br><br>
-	<table border="5px" cellspacing="10px" cellpadding="10px">
+	<div class="header"><h1>Buy Me</h1></div>
+    <ul class="topnav">
+		<li><a class="active" href="Dashboard">Home</a></li>
+	</ul>
+	<h1 align="center">Your Bids</h1>
+	<table align="center" border="5px" cellspacing="10px" cellpadding="10px">
 		<tr>
 			<th>Title</th>
 			<th>Type</th>
@@ -28,7 +86,6 @@
 		<%
 			try{
 				String user_email = session.getAttribute("email").toString();
-				out.println("<h1>" + user_email+ "</h1>");
 
 				String GET_ALL_DISTINCT_USER_BIDS = "select distinct bid.pid, product_title, product_type, product_brand, product_color, product_model, current_bid, max_bid_amount from biddings bid join product prod on bid.pid = prod.pid where prod.status = \"active\" and bid.email=\"" + user_email + "\";";
 				
@@ -58,7 +115,7 @@
                     out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
 					out.println("<input type = \"hidden\" name = \"email\" value=\""+user_email+"\"/>");
                     out.println("<input type = \"hidden\" name = \"current_bid\" value=\""+rs.getString("current_bid")+"\"/>");
-                    out.println("<td><input type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
+                    out.println("<td><input class= \"button1\" type = \"submit\" value = \"Place Bid\" placeholder = \"Place Bid\"/></td>");
                     out.println("</form>");
                     out.println("</tr>");
 				}
