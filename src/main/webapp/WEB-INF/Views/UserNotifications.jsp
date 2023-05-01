@@ -37,7 +37,7 @@
 	                out.println("<td>" + rs.getString("status") + "</td>");
 	                out.println("<form action=\""+request.getContextPath()+"/UserNotifications\" method=\"post\">");
 	                out.println("<td><input type = \"submit\" name = \"mark_as_read\" value = \"Mark As Read\"/></td>");
-	                out.println("<input type = \"hidden\" name = \"pid\" value=\""+rs.getString("pid")+"\"/>");
+	                out.println("<input type = \"hidden\" name = \"aid\" value=\""+rs.getString("aid")+"\"/>");
 	                out.println("</form>");
 	                out.println("</tr>");
                 }

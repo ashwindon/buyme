@@ -8,8 +8,8 @@ import java.util.HashMap;
 import repository.DatabaseConnection;
 
 public class UserNotificationManager {
-	public void MarkAsRead(int pid) {
-		String MARK_AS_READ_QUERY = "UPDATE alert SET status = \"read\" where pid = "+pid+";";
+	public void MarkAsRead(int aid,String email) {
+		String MARK_AS_READ_QUERY = "UPDATE alert SET status = \"read\" where aid = "+aid+" AND email = \""+email+"\";";
 		int success = 0;
 		try {
 			DatabaseConnection db = new DatabaseConnection();	

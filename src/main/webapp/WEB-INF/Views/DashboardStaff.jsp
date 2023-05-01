@@ -7,7 +7,7 @@
 <title>Staff Dashboard</title>
 </head>
 <body>
-<h1>This is Staff Dashboard!</h1>
+<h1>Welcome to Staff Dashboard!</h1>
 	<% 
 		response.setHeader("Cache-Control","no-cache");
 	  	response.setHeader("Cache-Control","no-store");
@@ -21,6 +21,10 @@
 		}
 	%>
 	<h1>Welcome <%=email %> </h1>
-	<a href="login">Logout</a>
+	<button onclick="window.location.href='AnswerQuestions'">Answer User Questions</button>
+	<br><br>
+	<button onclick="window.location.href='ProductDeletionRequests'">Product Deletion Request</button>
+	<br><br>
+	<button onclick="window.location.href='login'">Logout</button>
 </body>
 </html>

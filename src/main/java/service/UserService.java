@@ -172,5 +172,66 @@ public class UserService {
 		
 		return difference == 0;
 	}
+	
+	public int RaiseProductDeleteRequest(int pid, String email) {
+		//String MARK_AS_READ_QUERY = "DELETE from product where pid = "+pid+" AND email = \""+email+"\";";
+		String ALREADY_RAISED_REQUEST = "SELECT COUNT(*) as ct FROM product_requests where pid = "+pid+";";
+		String RAISE_PRODUCT_DELETE_REQUEST = "INSERT INTO product_requests (pid,email) values ("+pid+",\""+email+"\");";
+		int success = 0;
+		try {
+			DatabaseConnection db = new DatabaseConnection();	
+			Connection con = db.getConnection();
+			Statement statement = con.createStatement();
+			int temp_count = 0;
+			ResultSet rs = statement.executeQuery(ALREADY_RAISED_REQUEST);
+			while(rs.next()) {
+				temp_count = rs.getInt("ct");
+			}
+			if(temp_count == 0) {
+				PreparedStatement preparedStatement = con.prepareStatement(RAISE_PRODUCT_DELETE_REQUEST);
+				success = preparedStatement.executeUpdate();
+			}else {
+				success = 1;
+			}
+			
+			db.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+	
+	public int ProductDeletionRequest(int pid, String email) {
+		String DELETE_PRODUCT_QUERY = "DELETE from product where pid = "+pid+";";
+		//String RAISE_PRODUCT_DELETE_REQUEST = "INSERT INTO product_requests (pid,email) values ("+pid+",\""+email+"\");";
+		int success = 0;
+		try {
+			DatabaseConnection db = new DatabaseConnection();	
+			Connection con = db.getConnection();
+			PreparedStatement preparedStatement = con.prepareStatement(DELETE_PRODUCT_QUERY);
+			success = preparedStatement.executeUpdate();
+			db.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+	
+	public int DeleteRaisedProductDeletionRequest(int pid, String email) {
+		String DELETE_PRODUCT_QUERY = "DELETE from product_requests where pid = "+pid+";";
+		//String RAISE_PRODUCT_DELETE_REQUEST = "INSERT INTO product_requests (pid,email) values ("+pid+",\""+email+"\");";
+		int success = 0;
+		try {
+			DatabaseConnection db = new DatabaseConnection();	
+			Connection con = db.getConnection();
+			PreparedStatement preparedStatement = con.prepareStatement(DELETE_PRODUCT_QUERY);
+			success = preparedStatement.executeUpdate();
+			db.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+	
 
 }

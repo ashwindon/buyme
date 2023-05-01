@@ -8,24 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import java.io.PrintWriter;
-import service.UserNotificationManager;
-
 
 /**
- * Servlet implementation class UserNotifications
+ * Servlet implementation class MyQuestionAnswersController
  */
-@WebServlet("/UserNotifications")
-public class UserNotifications extends HttpServlet {
+@WebServlet("/MyQuestionAnswers")
+public class MyQuestionAnswersController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserNotificationManager userNotificationManager = new UserNotificationManager();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserNotifications() {
+    public MyQuestionAnswersController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +29,9 @@ public class UserNotifications extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Are we here?");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/UserNotifications.jsp");
+		RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/Views/MyQuestionAnswers.jsp");
 		dispathcer.forward(request,response);
 	}
 
@@ -45,14 +40,7 @@ public class UserNotifications extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(false);
-		String email = session.getAttribute("email").toString();
-		int aid = Integer.parseInt(request.getParameter("aid"));
-		userNotificationManager.MarkAsRead(aid,email);
-		PrintWriter out = response.getWriter();
-		out.println("<script type=\"text/javascript\">");   
-		out.println("window.location.href = \"/BuyMe/UserNotifications\";");
-		out.println("</script>;");
+		doGet(request, response);
 	}
 
 }

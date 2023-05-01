@@ -77,9 +77,13 @@ ul.topnav li.right {float: right;}
 	<br><br>
 	<button onclick="window.location.href='UserInterest'">User interest</button>
 	<br><br>
-	<button onclick="window.location.href='UserBid'">Your Bids</button>
+	<button onclick="window.location.href='UserBid'">Your Active Bids</button>
 	<br><br>
-	<button onclick="window.location.href='UserHistory'">Other users history</button>
+	<button onclick="window.location.href='UserHistory'">User history</button>
+	<br><br>
+	<button onclick="window.location.href='AskQuestions'">Ask a Question to Staff</button>
+	<br><br>
+	<button onclick="window.location.href='MyQuestionAnswers'">My Questions and Answers</button>
 	<br><br>
 	<button onclick="window.location.href='login'">Logout</button> -->
 
@@ -89,8 +93,10 @@ ul.topnav li.right {float: right;}
 		<li><a href="sell">Sell Products</a></li>
 		<li><a href="BuyProduct">Buy Products</a></li>
 		<li><a href="UserInterest">Interested</a></li>
-		<li><a href="UserBid">Your Bids</a></li>
-		<li><a href="UserHistory">History</a></li>
+		<li><a href="UserBid">Your Active Bids</a></li>
+		<li><a href="UserHistory">Your History</a></li>
+		<li><a href="AskQuestions">Ask a Question to Staff</a></li>
+		<li><a href="MyQuestionAnswers">My Questions and Answers</a></li>
 		<li><a href="qna">QnA</a></li>
 		<li class="right"><a href="login">Logout</a></li>
 	  </ul>
