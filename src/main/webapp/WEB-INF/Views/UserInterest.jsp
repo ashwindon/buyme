@@ -125,7 +125,9 @@
                     
 				    Statement statement1 = con.createStatement();
                     ResultSet rs1 = statement1.executeQuery(CHECK_PRODUCT);
+                    //out.println(CHECK_PRODUCT);
                     if(rs1.isBeforeFirst()) {
+                	//if(rs1.next()) {
                         out.println("<form action=\""+request.getContextPath()+"/BuyProduct\" method=\"get\">");
                         out.println("<input class= \"button1\" type = \"submit\" name = \"show_products\" value = \"Show Products\"/>");
                         out.println("<input type = \"hidden\" name = \"brand_search\" value=\""+brand+"\"/>");

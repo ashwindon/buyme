@@ -71,7 +71,7 @@
     <ul class="topnav">
 		<li><a class="active" href="Dashboard">Home</a></li>
 	</ul>
-    <div class="header"><h2>Model Sales Report</h2></div>
+    <div class="header"><h2>User Sales Report</h2></div>
 		<%
 			try{
 				//String GET_TOTAL_EARNINGS = "SELECT SUM(b.final_price) AS total_earnings FROM buys;";

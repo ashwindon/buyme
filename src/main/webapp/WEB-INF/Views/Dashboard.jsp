@@ -102,6 +102,7 @@ ul.topnav li.right {float: right;}
 	  </ul>
 
 	  <div class="header2"><h2>Welcome <%=email %></h2></div>
-	
+	  <div ><h3><center>We have everything you are looking for!<center></h3></div>
+	  <div ><h3><center> You are at the right place to buy or sell best cars!<center></h3></div>
 </body>
 </html>

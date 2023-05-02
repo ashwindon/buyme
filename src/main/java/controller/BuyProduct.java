@@ -85,7 +85,7 @@ public class BuyProduct extends HttpServlet {
 		String buttonClicked = request.getParameter("bid_action");
 		double min_amount_you_must_bid = Double.parseDouble(request.getParameter("min_amount_you_must_bid"));
 		System.out.println(max_bid_amnt + " " + min_amount_you_must_bid);
-		if(max_bid_amnt < min_amount_you_must_bid)
+		if("Auto Bid".equals(buttonClicked) && max_bid_amnt < min_amount_you_must_bid)
 		{
 			PrintWriter out = response.getWriter();
 			out.println("<script type=\"text/javascript\">");  
